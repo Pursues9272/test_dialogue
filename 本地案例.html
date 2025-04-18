@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>高德 AI 三维重建</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <style>
+        #cesiumContainer {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!--CesiumJS脚本与样式-->
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.128/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.128/Build/Cesium/Widgets/widgets.css"
+        rel="stylesheet" />
+    <!--云境插件JS-->
+    <script src="https://a.amap.com/yunjing/static/cesium/yunjing-for-cesium.js"></script>
+    <!--Cesium 容器-->
+    <div id="cesiumContainer"></div>
+    <!-- <img src="./nansha_bin_18/tileSet.json" alt=""> -->
+    <script>
+        Cesium.Ion.defaultAccessToken = undefined;
+        // Cesium.Ion.defaultAccessToken ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwM2Q4NzYyOS1kZDY4LTQxNDktYWExZi1hM2ZiZGE0MmNmOWQiLCJpZCI6NjYzNjEsImlhdCI6MTYzMDkwODQ1Mn0.Ac819G4l547EHMmCLZRDJfFBQhAxGAyvfoPhy35VGHI';
+
+        const viewer = new Cesium.Viewer('cesiumContainer', {
+            terrainProvider: new Cesium.EllipsoidTerrainProvider(), // 使用默认地形（非真实）
+            baseLayer: new YunJing.AMapSatelliteLayer(), // 卫星图
+            // baseLayer: new YunJing.AMapVectorLayer(), // 矢量道路图层
+            scene3DOnly: true,
+            contextOptions: {
+                requestWebgl2: true,
+            },
+        });
+        viewer.resolutionScale = Math.min(window.devicePixelRatio, 2.0); //高分屏比例
+        viewer.scene.postProcessStages.fxaa.enabled = true; //开启抗锯齿
+        viewer.scene.globe.depthTestAgainstTerrain = true; //开启地形深度
+
+        const { YunJingLayer } = YunJing;
+        const yunjingLayer = new YunJingLayer({
+            url: 'http://192.168.110.52:8082/tileSet.json',
+            // url: 'https://a.amap.com/yunjing/static/cesium/data/changping-3km18/tileset84.json',
+            viewer,
+            depthTest: true //需要拾取模型坐标的时候设置为true
+        });
+        viewer.camera.flyTo({
+            destination: Cesium.Cartesian3.fromDegrees(
+                116.185944,
+                40.230878,
+                162
+            ),
+            orientation: {
+                heading: Cesium.Math.toRadians(277),
+                pitch: Cesium.Math.toRadians(-36),
+                roll: 0,
+            },
+        });
+        viewer.screenSpaceEventHandler.setInputAction(function (movement) {
+            const pos = yunjingLayer.pickPosition(movement.position);
+            if (pos) {
+                console.log(pos.lnglat); //GPS坐标位置 {lng,lat,alt}
+                console.log(pos.ecef); //地心地固坐标坐标
+            }
+        }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+    </script>
+</body>
+
+</html>
