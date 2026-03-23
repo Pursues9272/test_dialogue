@@ -108,6 +108,12 @@
       color: #fff;
     }
   }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+    pointer-events: none;
+  }
 }
 
 .option-code {
@@ -163,31 +169,44 @@
   &:focus {
     border-color: #667eea;
   }
+
+  &:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+  }
 }
 
 .send-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 6px;
+  padding: 0 20px;
+  height: 40px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
   cursor: pointer;
   transition: all 0.2s;
+  border: none;
+  font-size: 14px;
+  white-space: nowrap;
 
   svg {
     color: #fff;
   }
 
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
   }
 
   &:active {
-    transform: scale(0.95);
+    transform: scale(0.98);
   }
+}
+
+.btn-text {
+  font-weight: 500;
 }
 
 // 完成提示
