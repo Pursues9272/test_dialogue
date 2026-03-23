@@ -2,7 +2,7 @@ import request from './request'
 
 // 提交单个AI问答
 export const submitAiSingle = (data: {
-  answers?: string
+  answers?: Record<number, string>
   options?: string
   tongueCode?: string
 }) => {

@@ -3,20 +3,27 @@
     <!-- 内容区 -->
     <div class="chat-content" ref="contentRef">
       <div v-for="(item, index) in chatList" :key="index" :class="['chat-item', item.type]">
-        <!-- 左侧：题目 -->
+        <!-- 左侧：AI消息 -->
         <div v-if="item.type === 'ai'" class="chat-bubble ai-bubble">
-          <div class="question-title">{{ item.question?.title }}</div>
-          <div class="question-type">题型：{{ item.question?.type }}</div>
-          <div class="options-list">
-            <div 
-              v-for="(option, optIndex) in item.question?.options" 
-              :key="optIndex" 
-              :class="['option-item', { selected: isOptionSelected(item.question?.id, option.code), disabled: isQuestionAnswered(item.question?.id) && item.question?.type === '单选' }]"
-              @click="selectOption(item.question?.id, option.code, option.label, item.question?.type)"
-            >
-              <span class="option-code">{{ option.code }}.</span>
-              <span class="option-label">{{ option.label }}</span>
+          <!-- 题目类型消息 -->
+          <template v-if="item.question">
+            <div class="question-title">{{ item.question?.title }}</div>
+            <div class="question-type">题型：{{ item.question?.type }}</div>
+            <div class="options-list">
+              <div 
+                v-for="(option, optIndex) in item.question?.options" 
+                :key="optIndex" 
+                :class="['option-item', { selected: isOptionSelected(item.question?.id, option.code), disabled: isQuestionAnswered(item.question?.id) && item.question?.type === '单选' }]"
+                @click="selectOption(item.question?.id, option.code, option.label, item.question?.type)"
+              >
+                <span class="option-code">{{ option.code }}.</span>
+                <span class="option-label">{{ option.label }}</span>
+              </div>
             </div>
+          </template>
+          <!-- 普通文本消息 -->
+          <div v-else-if="item.message" class="ai-message">
+            全部题目问题-选项：{{ item.message }}
           </div>
         </div>
         <!-- 右侧：用户选择的答案 -->
@@ -37,9 +44,8 @@
       <input 
         v-model="inputMessage" 
         class="message-input" 
-        placeholder="请输入问题..."
+        :placeholder="isAnswering ? '请输入内容或选择选项...' : '请输入问题...'"
         @keyup.enter="handleAction"
-        :disabled="isAnswering"
       />
       <div class="send-btn" @click="handleAction">
         <svg v-if="!isAnswering" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
@@ -51,7 +57,7 @@
         <svg v-else viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
           <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
         </svg>
-        <span v-if="isAnswering" class="btn-text">{{ isCompleted ? '完成' : '下一题' }}</span>
+        <span v-if="isAnswering" class="btn-text">{{ isCompleted ? '完成' : '发送' }}</span>
       </div>
     </div>
   </div>
@@ -167,8 +173,11 @@ const handleAction = async () => {
     if (isCompleted.value) {
       // 已完成：提交所有答案
       await submitAllAnswers()
+    } else if (inputMessage.value.trim()) {
+      // 有输入内容：发送自定义内容
+      await sendUserMessage()
     } else {
-      // 未完成：提交答案进入下一题
+      // 没有输入内容：提交答案进入下一题
       submitAnswer()
     }
   } else {
@@ -228,8 +237,16 @@ const sendMessage = async () => {
 
 // 显示下一题
 const showNextQuestion = () => {
+  // 防止重复调用
+  if (isCompleted.value) return
+  
   if (currentIndex < questionQueue.value.length) {
     const question = questionQueue.value[currentIndex]
+    // 检查是否有有效的问题
+    if (!question) {
+      console.warn('无效的问题索引:', currentIndex)
+      return
+    }
     chatList.value.push({
       type: 'ai',
       question
@@ -332,33 +349,65 @@ const submitAnswer = () => {
   }, 500)
 }
 
+// 发送用户自定义内容
+const sendUserMessage = async () => {
+  if (!inputMessage.value.trim()) return
+  
+  const userMsg = inputMessage.value
+  
+  // 添加用户消息到右侧
+  chatList.value.push({
+    type: 'user',
+    message: userMsg
+  })
+  
+  inputMessage.value = ''
+  
+  scrollToBottom()
+  
+  // 进入下一题
+  setTimeout(() => {
+    showNextQuestion()
+  }, 500)
+}
+
 // 提交所有答案
 const submitAllAnswers = async () => {
   if (questionQueue.value.length === 0) return
   
-  // 构建options参数: 1-a.2-b.3-c
-  const optionsParts: string[] = []
-  Object.keys(selectedAnswers.value).forEach(questionId => {
-    const answer = selectedAnswers.value[Number(questionId)]
-    if (answer) {
-      const options = Array.isArray(answer) ? answer : [answer]
-      const formatted = `${questionId}-${options.join('.')}`
-      optionsParts.push(formatted)
+  // 构建answers参数: 对象格式 { 题目ID: 用户发送的答案内容 }
+  const answersObj: Record<number, string> = {}
+  
+  // 遍历聊天记录，获取用户的回答
+  chatList.value.forEach(item => {
+    if (item.type === 'user' && item.message) {
+      // 找到对应的题目ID
+      const userAnswerIndex = chatList.value.indexOf(item)
+      const aiQuestionItem = [...chatList.value].slice(0, userAnswerIndex).reverse().find(i => i.type === 'ai' && i.question)
+      
+      if (aiQuestionItem?.question) {
+        const questionId = aiQuestionItem.question.id
+        answersObj[questionId] = item.message
+      }
     }
   })
   
   try {
     const res = await submitAiSingle({
-      options: optionsParts.join('.')
+      tongueCode: '1',
+      options: '',
+      answers: answersObj
     })
     
     console.log('提交成功:', res)
     
-    // 添加提交成功提示
-    chatList.value.push({
-      type: 'ai',
-      message: '提交成功！感谢您的参与。'
-    })
+    // 显示接口返回的data数据
+    if (res.data) {
+      chatList.value.push({
+        type: 'ai',
+        message: res.data
+      })
+    }
     
     scrollToBottom()
   } catch (error) {
