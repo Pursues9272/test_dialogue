@@ -22,7 +22,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.15);
     border-radius: 3px;
   }
 }
@@ -44,8 +44,8 @@
 // 聊天气泡
 .chat-bubble {
   max-width: 70%;
-  padding: 12px 16px;
-  border-radius: 8px;
+  padding: 16px 20px;
+  border-radius: 12px;
   word-wrap: break-word;
 }
 
@@ -58,10 +58,19 @@
 }
 
 .question-title {
-  font-size: 15px;
-  font-weight: 500;
-  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
   line-height: 1.5;
+  color: #1a1a2e;
+}
+
+.question-type {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
 }
 
 .options-list {
@@ -71,25 +80,56 @@
 }
 
 .option-item {
-  padding: 8px 12px;
-  background-color: #e8f4ff;
-  border-radius: 6px;
+  padding: 10px 14px;
+  background-color: #f0f7ff;
+  border-radius: 8px;
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s;
-  color: #4a90e2;
+  color: #333;
+  display: flex;
+  align-items: flex-start;
 
   &:hover {
     background-color: #4a90e2;
     color: #fff;
     transform: translateX(4px);
+    
+    .option-code {
+      color: #fff;
+    }
   }
+
+  &.selected {
+    background-color: #4a90e2;
+    color: #fff;
+    
+    .option-code {
+      color: #fff;
+    }
+  }
+}
+
+.option-code {
+  font-weight: 600;
+  color: #4a90e2;
+  margin-right: 8px;
+  min-width: 20px;
+}
+
+.option-label {
+  line-height: 1.4;
 }
 
 // 用户气泡 - 右侧
 .user-bubble {
-  background-color: #4a90e2;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #fff;
+}
+
+.user-answer {
+  font-size: 14px;
+  line-height: 1.4;
 }
 
 // 输入区
@@ -147,5 +187,33 @@
 
   &:active {
     transform: scale(0.95);
+  }
+}
+
+// 完成提示
+.completion-tip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  margin-top: 20px;
+
+  .tip-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .tip-text {
+    font-size: 16px;
+    color: #666;
   }
 }

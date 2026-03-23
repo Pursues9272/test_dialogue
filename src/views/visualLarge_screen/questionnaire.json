@@ -1,0 +1,712 @@
+{
+  "surveyQuestions": [
+    {
+      "id": 1,
+      "title": "近两个月内的睡眠质量",
+      "type": "多选",
+      "options": [
+        {
+          "code": "a",
+          "label": "11点前睡，入睡快，一觉天亮"
+        },
+        {
+          "code": "b",
+          "label": "11-1点开始睡觉"
+        },
+        {
+          "code": "c",
+          "label": "1点后开始睡觉"
+        },
+        {
+          "code": "d",
+          "label": "难入睡，睡后一觉天亮"
+        },
+        {
+          "code": "e",
+          "label": "睡眠浅，容易醒来，醒来时间不固定，能继续睡，不起夜小便"
+        },
+        {
+          "code": "f",
+          "label": "睡眠浅，容易醒来，醒来时间不固定，能继续睡，必须起夜小便"
+        },
+        {
+          "code": "g",
+          "label": "11-1点之间醒来，小便后能继续睡"
+        },
+        {
+          "code": "h",
+          "label": "1-3点之间醒来，小便后能继续睡"
+        },
+        {
+          "code": "i",
+          "label": "3-5点之间醒来，小便后能继续睡"
+        },
+        {
+          "code": "j",
+          "label": "11-1点之间一定醒来，1点以后才能入睡"
+        },
+        {
+          "code": "k",
+          "label": "1-3点之间一定醒来，3点以后才能入睡"
+        },
+        {
+          "code": "l",
+          "label": "3-5点之间一定醒来，5点以后才能入睡"
+        },
+        {
+          "code": "m",
+          "label": "只要夜里醒来，就很难再入睡，天亮后才能继续睡"
+        }
+      ],
+      "description": "a和所有选项互斥，a、b、c互斥，g-i与j-l互斥，d、e、f三个互斥，m与a、d-l互斥，c和g、j互斥，d和g-l互斥。"
+    },
+    {
+      "id": 2,
+      "title": "近两周内的口感",
+      "type": "多选",
+      "options": [
+        {
+          "code": "a",
+          "label": "无以下症状。"
+        },
+        {
+          "code": "b",
+          "label": "有时口干"
+        },
+        {
+          "code": "c",
+          "label": "经常口干"
+        },
+        {
+          "code": "d",
+          "label": "有时口苦"
+        },
+        {
+          "code": "e",
+          "label": "经常口苦"
+        },
+        {
+          "code": "f",
+          "label": "有时口甜"
+        },
+        {
+          "code": "g",
+          "label": "经常口甜"
+        },
+        {
+          "code": "h",
+          "label": "有时口淡无味"
+        },
+        {
+          "code": "i",
+          "label": "经常口淡无味"
+        }
+      ],
+      "description": "a，b-i只能选一类；b，c选一；d，e选一；f，g选一；h，i选一。C，e，g，i只能选一。"
+    },
+    {
+      "id": 3,
+      "title": "近两个月内的大便次数",
+      "type": "单选",
+      "options": [
+        {
+          "code": "a",
+          "label": "一次一天"
+        },
+        {
+          "code": "b",
+          "label": "两天一次"
+        },
+        {
+          "code": "c",
+          "label": "两天以上一次"
+        },
+        {
+          "code": "d",
+          "label": "一天两次"
+        },
+        {
+          "code": "e",
+          "label": "一天三次"
+        },
+        {
+          "code": "f",
+          "label": "一天三次以上"
+        },
+        {
+          "code": "g",
+          "label": "近两个月时泻时便秘"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "id": 4,
+      "title": "近两个月内的大便状况",
+      "type": "多选",
+      "options": [
+        {
+          "code": "a",
+          "label": "黄色"
+        },
+        {
+          "code": "b",
+          "label": "褐色"
+        },
+        {
+          "code": "c",
+          "label": "黑色"
+        },
+        {
+          "code": "d",
+          "label": "稀浆糊状"
+        },
+        {
+          "code": "e",
+          "label": "稀水状"
+        },
+        {
+          "code": "f",
+          "label": "大便不易出"
+        },
+        {
+          "code": "g",
+          "label": "大便特别腥臭"
+        },
+        {
+          "code": "h",
+          "label": "大便后还想大便，肛门发胀"
+        }
+      ],
+      "description": "a，b，c选一；d，e选一。"
+    },
+    {
+      "id": 5,
+      "title": "近两个月内的手脚状况",
+      "type": "多选",
+      "options": [
+        {
+          "code": "a",
+          "label": "无以下症状"
+        },
+        {
+          "code": "b",
+          "label": "手心感觉比较热"
+        },
+        {
+          "code": "c",
+          "label": "脚心感觉比较热"
+        },
+        {
+          "code": "d",
+          "label": "手凉"
+        },
+        {
+          "code": "e",
+          "label": "脚凉"
+        },
+        {
+          "code": "f",
+          "label": "手总出汗"
+        },
+        {
+          "code": "g",
+          "label": "脚总出汗"
+        },
+        {
+          "code": "h",
+          "label": "手很干，皮肤发糙"
+        },
+        {
+          "code": "i",
+          "label": "脚很干，脚后跟有裂口"
+        },
+        {
+          "code": "j",
+          "label": "手很红，与别人比有明显差别"
+        },
+        {
+          "code": "k",
+          "label": "手心总痒"
+        }
+      ],
+      "description": "a和b-k互斥，b和d互斥，c和e互斥，f和h互斥，g和i互斥，j、k和其他都没有互斥。"
+    },
+    {
+      "id": 6,
+      "title": "近一个月内的胃脘状况",
+      "type": "多选",
+      "options": [
+        {
+          "code": "a",
+          "label": "无以下症状"
+        },
+        {
+          "code": "b",
+          "label": "一般"
+        },
+        {
+          "code": "c",
+          "label": "经常胃胀"
+        },
+        {
+          "code": "d",
+          "label": "经常恶心"
+        },
+        {
+          "code": "e",
+          "label": "经常反酸"
+        },
+        {
+          "code": "f",
+          "label": "经常胃痛"
+        },
+        {
+          "code": "g",
+          "label": "经常打嗝"
+        }
+      ],
+      "description": "a，b，c-g选一。"
+    },
+    {
+      "id": 7,
+      "title": "近一个月内的体力状况",
+      "type": "多选",
+      "options": [
+        {
+          "code": "a",
+          "label": "无以下症状"
+        },
+        {
+          "code": "b",
+          "label": "早上醒来就感觉累"
+        },
+        {
+          "code": "c",
+          "label": "上午就感觉累"
+        },
+        {
+          "code": "d",
+          "label": "下午感觉累"
+        },
+        {
+          "code": "e",
+          "label": "上午就发困"
+        },
+        {
+          "code": "f",
+          "label": "下午发困"
+        }
+      ],
+      "description": "a，b-f选一"
+    },
+    {
+      "id": 8,
+      "title": "近一个月内的心脏状况",
+      "type": "多选",
+      "options": [
+        {
+          "code": "a",
+          "label": "无以下症状"
+        },
+        {
+          "code": "b",
+          "label": "偶尔心慌"
+        },
+        {
+          "code": "c",
+          "label": "经常心慌"
+        },
+        {
+          "code": "d",
+          "label": "偶尔心突突跳"
+        },
+        {
+          "code": "e",
+          "label": "经常心突突跳"
+        },
+        {
+          "code": "f",
+          "label": "偶尔胸闷"
+        },
+        {
+          "code": "g",
+          "label": "经常胸闷"
+        },
+        {
+          "code": "h",
+          "label": "偶尔后背痛"
+        },
+        {
+          "code": "i",
+          "label": "经常后背痛"
+        },
+        {
+          "code": "j",
+          "label": "偶尔肩膀痛"
+        },
+        {
+          "code": "k",
+          "label": "经常肩膀痛"
+        }
+      ],
+      "description": "a，b-k选一；b，c选一；d，e选一；f，g选一；h，i选一；j，k选一。"
+    },
+    {
+      "id": 9,
+      "title": "近两周内的口腔状况",
+      "type": "多选",
+      "options": [
+        {
+          "code": "a",
+          "label": "无以下症状"
+        },
+        {
+          "code": "b",
+          "label": "舌头溃疡"
+        },
+        {
+          "code": "c",
+          "label": "牙龈溃疡"
+        },
+        {
+          "code": "d",
+          "label": "颊侧溃疡"
+        },
+        {
+          "code": "e",
+          "label": "上牙龈肿或痛"
+        },
+        {
+          "code": "f",
+          "label": "下牙龈肿或痛"
+        },
+        {
+          "code": "g",
+          "label": "口气重"
+        },
+        {
+          "code": "h",
+          "label": "舌头火辣辣疼"
+        }
+      ],
+      "description": "a，b-h选一"
+    },
+    {
+      "id": 10,
+      "title": "近两周内的咳嗽症状",
+      "type": "单选",
+      "options": [
+        {
+          "code": "a",
+          "label": "无以下症状"
+        },
+        {
+          "code": "b",
+          "label": "黄痰"
+        },
+        {
+          "code": "c",
+          "label": "白痰"
+        },
+        {
+          "code": "d",
+          "label": "干咳"
+        },
+        {
+          "code": "e",
+          "label": "嗓子总有痰感觉"
+        },
+        {
+          "code": "f",
+          "label": "从腹部上冲"
+        },
+        {
+          "code": "g",
+          "label": "有腥气味道"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "id": 11,
+      "title": "近一个月内的脾气",
+      "type": "单选",
+      "options": [
+        {
+          "code": "a",
+          "label": "平和"
+        },
+        {
+          "code": "b",
+          "label": "易发脾气"
+        },
+        {
+          "code": "c",
+          "label": "易生气"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "id": 12,
+      "title": "近一个月内的疼痛状况",
+      "type": "多选",
+      "options": [
+        {
+          "code": "a",
+          "label": "无以下症状"
+        },
+        {
+          "code": "b",
+          "label": "头顶痛"
+        },
+        {
+          "code": "c",
+          "label": "太阳穴痛"
+        },
+        {
+          "code": "d",
+          "label": "前额痛"
+        },
+        {
+          "code": "e",
+          "label": "后脑勺痛"
+        },
+        {
+          "code": "f",
+          "label": "腰痛"
+        },
+        {
+          "code": "g",
+          "label": "腰常酸"
+        },
+        {
+          "code": "h",
+          "label": "腹痛"
+        },
+        {
+          "code": "i",
+          "label": "脚后跟痛"
+        },
+        {
+          "code": "j",
+          "label": "脚趾痛"
+        },
+        {
+          "code": "k",
+          "label": "手指痛"
+        },
+        {
+          "code": "l",
+          "label": "手指麻木"
+        },
+        {
+          "code": "m",
+          "label": "嗓子痛"
+        }
+      ],
+      "description": "a，b-m选一"
+    },
+    {
+      "id": 13,
+      "title": "近一个月内的小便状况",
+      "type": "多选",
+      "options": [
+        {
+          "code": "a",
+          "label": "无以下症状"
+        },
+        {
+          "code": "b",
+          "label": "热"
+        },
+        {
+          "code": "c",
+          "label": "痛"
+        },
+        {
+          "code": "d",
+          "label": "无力"
+        },
+        {
+          "code": "e",
+          "label": "一天6次以上"
+        },
+        {
+          "code": "f",
+          "label": "浊白色"
+        },
+        {
+          "code": "g",
+          "label": "不易出或中间停顿"
+        },
+        {
+          "code": "h",
+          "label": "有出血"
+        }
+      ],
+      "description": "a，b-h选一。"
+    },
+    {
+      "id": 14,
+      "title": "近一个月内的其它状况",
+      "type": "多选",
+      "options": [
+        {
+          "code": "a",
+          "label": "无以下症状"
+        },
+        {
+          "code": "b",
+          "label": "眼干"
+        },
+        {
+          "code": "c",
+          "label": "早晨起来有眼屎"
+        },
+        {
+          "code": "d",
+          "label": "鼻子干"
+        },
+        {
+          "code": "e",
+          "label": "鼻塞"
+        },
+        {
+          "code": "f",
+          "label": "耳鸣"
+        },
+        {
+          "code": "g",
+          "label": "耳聋"
+        },
+        {
+          "code": "h",
+          "label": "脸轰热"
+        },
+        {
+          "code": "i",
+          "label": "话说多就咽干或哑"
+        }
+      ],
+      "description": "a，b-i选一。"
+    },
+    {
+      "id": 15,
+      "title": "近三个月内的例假时间",
+      "type": "单选",
+      "options": [
+        {
+          "code": "a",
+          "label": "正常"
+        },
+        {
+          "code": "b",
+          "label": "时间提前"
+        },
+        {
+          "code": "c",
+          "label": "时间推后"
+        },
+        {
+          "code": "d",
+          "label": "时间或前或后不稳定"
+        }
+      ],
+      "description": "单选"
+    },
+    {
+      "id": 16,
+      "title": "近三个月内的例假量",
+      "type": "单选",
+      "options": [
+        {
+          "code": "a",
+          "label": "正常"
+        },
+        {
+          "code": "b",
+          "label": "量多"
+        },
+        {
+          "code": "c",
+          "label": "量少"
+        },
+        {
+          "code": "d",
+          "label": "量不稳定"
+        }
+      ],
+      "description": "单选"
+    },
+    {
+      "id": 17,
+      "title": "近三个月内的例假症状",
+      "type": "多选",
+      "options": [
+        {
+          "code": "a",
+          "label": "无以下症状"
+        },
+        {
+          "code": "b",
+          "label": "第一天肚子痛，后面不痛了"
+        },
+        {
+          "code": "c",
+          "label": "一直肚子痛"
+        },
+        {
+          "code": "d",
+          "label": "一直肚子很痛"
+        },
+        {
+          "code": "e",
+          "label": "第一天头痛"
+        },
+        {
+          "code": "f",
+          "label": "一直头痛"
+        },
+        {
+          "code": "g",
+          "label": "有血块，黑色或褐色"
+        },
+        {
+          "code": "h",
+          "label": "手脚凉"
+        },
+        {
+          "code": "i",
+          "label": "易发脾气"
+        },
+        {
+          "code": "j",
+          "label": "第一天腰痛"
+        },
+        {
+          "code": "k",
+          "label": "一直腰痛"
+        },
+        {
+          "code": "l",
+          "label": "第一天腰酸"
+        },
+        {
+          "code": "m",
+          "label": "一直腰酸"
+        },
+        {
+          "code": "n",
+          "label": "第一天肚子坠胀"
+        },
+        {
+          "code": "o",
+          "label": "一直肚子坠胀"
+        }
+      ],
+      "description": ""
+    }
+  ]
+}
