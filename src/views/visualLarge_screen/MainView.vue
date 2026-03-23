@@ -8,8 +8,8 @@
           <!-- 题目类型消息 -->
           <template v-if="item.question">
             <div class="question-title">{{ item.question?.title }}</div>
-            <div class="question-type">题型：{{ item.question?.type }}</div>
-            <div class="options-list">
+            <!-- <div class="question-type">题型：{{ item.question?.type }}</div> -->
+            <!-- <div class="options-list">
               <div 
                 v-for="(option, optIndex) in item.question?.options" 
                 :key="optIndex" 
@@ -19,7 +19,7 @@
                 <span class="option-code">{{ option.code }}.</span>
                 <span class="option-label">{{ option.label }}</span>
               </div>
-            </div>
+            </div> -->
           </template>
           <!-- 普通文本消息 -->
           <div v-else-if="item.message" class="ai-message">
@@ -51,13 +51,10 @@
         <svg v-if="!isAnswering" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
           <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
         </svg>
-        <svg v-else-if="isAnswering && !isCompleted" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+        <svg v-else viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
           <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
         </svg>
-        <svg v-else viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-          <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
-        </svg>
-        <span v-if="isAnswering" class="btn-text">{{ isCompleted ? '完成' : '发送' }}</span>
+        <span v-if="isAnswering" class="btn-text">{{ isCompleted ? '重新开始' : '发送' }}</span>
       </div>
     </div>
   </div>
@@ -168,12 +165,19 @@ const scrollToBottom = () => {
 
 // 处理按钮点击/回车
 const handleAction = async () => {
+  // 如果已完成状态，重新开始
+  if (isCompleted.value) {
+    isCompleted.value = false
+    questionQueue.value = []
+    currentIndex = 0
+    selectedAnswers.value = {}
+    await sendMessage()
+    return
+  }
+
   if (isAnswering.value) {
     // 答题状态
-    if (isCompleted.value) {
-      // 已完成：提交所有答案
-      await submitAllAnswers()
-    } else if (inputMessage.value.trim()) {
+    if (inputMessage.value.trim()) {
       // 有输入内容：发送自定义内容
       await sendUserMessage()
     } else {
@@ -254,9 +258,11 @@ const showNextQuestion = () => {
     currentIndex++
     scrollToBottom()
   } else {
-    // 所有题目完成
+    // 所有题目完成，自动提交
     isCompleted.value = true
     scrollToBottom()
+    // 自动提交所有答案
+    submitAllAnswers()
   }
 }
 
